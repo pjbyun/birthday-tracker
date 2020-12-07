@@ -17,11 +17,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const port = process.env.PORT || 8080;
-app.listen(port, () => {
-  console.log(`API listening on port ${port}...`);
-});
-
 app.use(express.json());
 
 app.use('/api/birthdays', birthdaysRouter);
@@ -35,3 +30,7 @@ app.use((err, req, res, next) => {
    });
 });
 
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+  console.log(`API listening on port ${port}...`);
+});

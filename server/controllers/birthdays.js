@@ -2,9 +2,8 @@ const Birthday = require('../db/models/birthday.model');
 
 const getBirthdays = async ( req, res, next) => {
     try {
-        const birthday = await Birthday(req.body);
-        await birthday.save()
-        res.status(201).json(birthday);
+        const birthdays = await Birthday.find();
+        res.json(birthdays);
     } catch (err) {
         next(err);
     }
@@ -14,7 +13,7 @@ const createBirthday = async (req, res, next) => {
     try {
         const birthday = new Birthday(req.body);
         await birthday.save()
-        res.status(201).json(question);
+        res.status(201).json(birthday);
     }   catch (err) {
         next(err);
     }
@@ -29,12 +28,18 @@ const getSingleBirthday = async (req, res, next) => {
     }
 };
 
-// const updateBirthday = (req, res, next) => {
-//     try {
-//         const id = req.params.id;
-//         const {}
-//     }
-// }
+const updateBirthday = async (req, res, next) => {
+    try {
+        const updatedBirthday = await Birthday.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true,
+        });
+        await updatedBirthday.save();
+        res.json(updatedBirthday);
+    }   catch (err) {
+        next(err);
+    }
+};
 
 const deleteBirthday = async (req, res, next) => {
     try {
@@ -49,5 +54,6 @@ module.exports = {
     getBirthdays,
     createBirthday,
     getSingleBirthday,
+    updateBirthday,
     deleteBirthday
 };

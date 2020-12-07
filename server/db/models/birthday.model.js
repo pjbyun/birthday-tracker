@@ -7,7 +7,8 @@ const BirthdaySchema = new Schema(
         cohort_number: { type: String, required: true },
         month: { type: String, required: true },
         date: { type: String, required: true }
-    }
+    },
+    { timestamps: true }
 )
 
 const Birthday = mongoose.model("Birthday", BirthdaySchema);

@@ -4,6 +4,7 @@ const {
     getBirthdays,
     createBirthday,
     getSingleBirthday,
+    updateBirthday,
     deleteBirthday
 } = require('../controllers/birthdays')
 
@@ -13,7 +14,7 @@ router.route('/').post(createBirthday);
 
 router.route('/:id').get(getSingleBirthday);
 
-// router.route('/:id').put(updateBirthday);
+router.route('/:id').put(updateBirthday);
 
 router.route('/:id').delete(deleteBirthday);
 
